@@ -35,10 +35,13 @@
           <td>コメント数:<%= @book_show.comments.count %></td>
         </tr>
       </table>
-      <%= form_with model:[@book_show,@comment] do |f| %>
+      <div>
+      <%= form_with model: @comment,url: book_comments_path(@book_show.id,@comment.id) do |f| %>
+      <%#= form_with model:[@book_show,@comment] do |f| %>
        <div><%= f.text_area :comment, rows:"5" %></div>
        <%= f.submit "送信" %>
       <% end %>
+      </div>
     </div>
   </div>
 </div>
