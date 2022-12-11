@@ -16,6 +16,7 @@
             <% end %>
           </td>
           <td><%= link_to @book_show.title, @book_show %></td>
+          <td><%= @book_show.body %></td>
           <td>
             <% if @book_show.favorited_by?(current_user) %>
               <%= link_to book_favorites_path(@book_show), method: :delete do %>
@@ -27,13 +28,17 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= @book_show.body %></td>
         <% if @book_show.user_id == current_user.id %>
           <td><%= link_to 'Edit', edit_book_path(@book_show), class: "btn btn-sm btn-success" %></td>
           <td><%= link_to 'Destroy', @book_show, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
         <% end %>
+          <td>コメント数:<%= @book_show.comments.count %></td>
         </tr>
       </table>
+      <%= form_with model:[@book_show,@comment] do |f| %>
+       <div><%= f.text_area :comment, rows:"5" %></div>
+       <%= f.submit "送信" %>
+      <% end %>
     </div>
   </div>
 </div>
