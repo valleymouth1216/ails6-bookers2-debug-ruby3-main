@@ -10,9 +10,8 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    comment = Commtent.find(params[:book_id])
-    comment.destroy
-    redirect_to book_path(book.id)
+    Comment.find(params[:id]).destroy
+    redirect_to book_path(params[:book_id])
   end
 
  private
