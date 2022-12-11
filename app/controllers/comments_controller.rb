@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
 
   def create
-    comment = Comment.find(params[:book_id])
+    book = Book.find(params[:book_id])
     comment = current_user.comments.new(comment_params)
-    comment.book_id = book_id
+    comment.book_id = book.id
     comment.save
-    redirect_to book_path(book.id)
+    redirect_to book_path(book)
   end
 
 
@@ -16,10 +16,10 @@ class CommentsController < ApplicationController
   end
 
  private
- binding.pry
-　def comment_params
-　  params.require(:comment).permit(:comment)
-　end
+ #binding.pry
+  def comment_params
+    params.require(:comment).permit(:comment)
+  end
 
 
 end
